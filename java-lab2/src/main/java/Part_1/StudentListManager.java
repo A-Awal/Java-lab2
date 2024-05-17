@@ -1,6 +1,4 @@
-package Arrays_and_Linkedlist;
-
-import java.io.Console;
+package Part_1;
 
 public class StudentListManager {
     private String[] students = new  String[10];
@@ -8,20 +6,25 @@ public class StudentListManager {
     private int counter = 0;
     private double loadFactor = 0.9;
 
-    void addStudent(String name){
+    public void addStudent(String name){
         sizeManager();
         students[counter] = name;
         counter++;
     }
-    int findStudent(String name){
-        for (int i = 0; i < counter; i++) {
-            if(students[i] == name){ return i; }
-        }
+    public int findStudent(String name){
 
-        return -1;
+        int index = -1;
+        for (int i = 0; i < counter; i++) {
+            if(students[i] != null && students[i].equals(name) ){
+                index = i;
+            }
+
+        }
+         return index;
+
     }
 
-    boolean removeStudent(String name){
+    public boolean removeStudent(String name){
 
        var index = findStudent(name);
        if(index != -1){
@@ -34,8 +37,10 @@ public class StudentListManager {
        return false;
     }
 
-    void displayStudents(){
-        Console.pr(students.toString());
+    public void displayStudents(){
+        for (int i = 0; i < counter; i++) {
+            System.out.println(students[i]);
+        }
     }
 
     void sizeManager(){

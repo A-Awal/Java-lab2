@@ -1,12 +1,19 @@
-package Part_2;
+package com.amalitech.Services;
+
+import org.springframework.stereotype.Component;
+
 import java.util.Stack;
 
-
+/**
+ * My service to be injected 
+ * A simple calculator app
+ */
+@Component
 public class Calculator {
     Stack<Object> inputs = new Stack<>();
 
-    void addToStack(Object s) {
-
+    public void addToStack(Object s) {
+        System.out.println("Adding " + s + " to stack");
         if(s == "+"){
             addOperatorToStack(this::addition);
         }
@@ -25,10 +32,11 @@ public class Calculator {
 
     }
 
-    Number calculate(){
+    public Number calculate(){
         int lastInput = (int)inputs.pop();
         OperatorFunction fn = (OperatorFunction) inputs.pop();
         int firstInput = (int)inputs.pop();
+        System.out.println("Estimated result is:");
         return  fn.operate(firstInput, lastInput);
     }
 
@@ -51,12 +59,7 @@ public class Calculator {
 
 
     @FunctionalInterface
-    public  interface OperatorFunction{
+    private  interface OperatorFunction{
         Number operate(int a, int b);
     }
-//
-//    @FunctionalInterface
-//    public  interface DivisionFunction{
-//        double operate(int a, int b);
-//    }
 }
